@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { rejects } = require("assert");
 const staff = [];
 
 // Write code to use inquirer to gather information about the development team members,
@@ -41,9 +42,13 @@ inquirer  .prompt([
     ]).then(answers => {
         const manager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber)
         staff.push(manager)
-        updateManager();
+        updateStaff();
     })
+
+
 }
+
+updateManager()
         const addIntern = () => {
             inquirer.prompt([
                 {
@@ -70,7 +75,7 @@ inquirer  .prompt([
                 ]).then(answers => {
                     const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool)
                     staff.push(intern)
-                    updateIntern();
+                    UpdateStaff();
                 })
             }
 
@@ -100,9 +105,39 @@ inquirer  .prompt([
                     ]).then(answers => {
                         const intern = new Intern(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGitHub)
                         staff.push(engineer)
-                        updateEngineer();
+                        updateStaff();
                     })
                 }
+                
+                const updateStaff = () => {
+                    return inquirer.prompt([
+                        {
+                            type: "list",
+                            name: "staffJob",
+                            message: "Choose what type of employee you are adding.",
+                            choices: ["Manager", "Intern", "Engineer"] 
+                        }
+                    ])
+                    .then(answers => {
+                        if (answers.staffJob == "Engineer") {
+                            updateEngineer();
+
+                        } else if (answers.updateStaff == "intern") {
+                            updateIntern();
+
+                        } else {
+                            const html = render(staff);
+                            return fs.writeFile('./output/team.html'), html, error => {
+                                if (error) {
+                                    rejects(error);
+                                    return;
+                                }
+                            }
+                        }
+
+                    })
+                }
+                
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
@@ -121,4 +156,4 @@ inquirer  .prompt([
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
+// for the provided `render` function to work! 

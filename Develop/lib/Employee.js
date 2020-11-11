@@ -8,16 +8,18 @@ class Employee {
         this.role = 'Employee';
     }
     getName() {
-        return this.name;
-    }
+        return this.name
+    };
     getId() {
-        return this.id;
-    }
+        return this.id
+    };
     getEmail() {
         return this.email;
-    }
+    };
     getRole() {
-        return this.role;
-    }
+        return this.role
+    };
 
 }
+
+module.exports = Employee;
