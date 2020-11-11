@@ -44,6 +44,65 @@ inquirer  .prompt([
         updateManager();
     })
 }
+        const addIntern = () => {
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "internName",
+                    message: "What is your intern's name?"
+                   },
+                   {
+                    type: "input",
+                    name: "internID",
+                    message: "What is your intern's ID?"
+                   },
+                   {
+                    type: "input",
+                    name:"internEmail",
+                    message: "What was your interns email?"
+                   },
+                   {
+                    type: "input",
+                    name:"internSchool",
+                    message: "What is your interns school?"
+                   }
+
+                ]).then(answers => {
+                    const intern = new Intern(answers.internName, answers.internID, answers.internEmail, answers.internSchool)
+                    staff.push(intern)
+                    updateIntern();
+                })
+            }
+
+            const addEngineer = () => {
+                inquirer.prompt([
+                    {
+                        type: "input",
+                        name: "engineerName",
+                        message: "What is your engineer's name?"
+                       },
+                       {
+                        type: "input",
+                        name: "engineerID",
+                        message: "What is your engineer's ID?"
+                       },
+                       {
+                        type: "input",
+                        name:"engineerEmail",
+                        message: "What was your engineer's email?"
+                       },
+                       {
+                        type: "input",
+                        name:"engineerGitHub",
+                        message: "What is your engineer's GitHub?"
+                       }
+    
+                    ]).then(answers => {
+                        const intern = new Intern(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGitHub)
+                        staff.push(engineer)
+                        updateEngineer();
+                    })
+                }
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
