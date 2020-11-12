@@ -5,7 +5,7 @@ The link for the repository: https://github.com/victoriahunter11/TeamGenerator
 
 
 Here is what the page looks like when you are answering questions:
-![writingteam](Assets/teamdisplay.png)
+![writingteam](Assets/writingteam.png)
 Here is the HTML page that it generates for you:
 [![Watch the video](/Assets/teamdisplay.png)](
 https://youtu.be/uO9I35qXzSA)
